@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xeno-Growth | Lab Environment</title>
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head> 
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <nav class="h-14 border-b border-[#21262d] flex items-center justify-between px-6 bg-[#0d1117] shrink-0">
+        <div class="flex items-center space-x-6">
+            <h1 class="text-sm font-bold tracking-tighter text-white uppercase mono">
+                System: <span class="text-blue-500 font-light">Xeno.Growth.v2</span>
+            </h1>
+            <div class="flex space-x-4">
+                <span id="growth-status" class="status-tag mono uppercase border-green-900 text-green-500 bg-green-900/10 text-[9px]">Status: Idle</span>
+            </div>
+        </div>
+        <div class="hidden lg:flex space-x-8 text-[10px] mono text-gray-500 uppercase tracking-widest">
+            <div>Nodes: <span id="stat-nodes" class="text-white">0</span></div>
+            <div>Entropy: <span id="stat-targets" class="text-white">0</span></div>
+            <div>FPS: <span id="stat-fps" class="text-white">60</span></div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex overflow-hidden">
+        <aside class="w-80 bg-[#0d1117] border-r border-[#21262d] overflow-y-auto px-6 pb-12 shrink-0">
+            
+            <div class="sidebar-section">
+                <label class="text-[10px] mono text-gray-500 uppercase tracking-widest block mb-3">Target Preset</label>
+                <select id="preset" class="w-full bg-[#161b22] border border-[#30363d] rounded p-2 text-sm text-gray-300 focus:outline-none focus:border-blue-500 mono">
+                    <option value="tree">Neural Structure</option>
+                    <option value="radial">Isotropic Burst</option>
+                    <option value="veins">Capillary Map</option>
+                    <option value="forest">Rhizome Field</option>
+                    <option value="top_down">Gravimetric Roots</option>
+                </select>
+            </div>
+
+            <div class="sidebar-section space-y-6">
+                <label class="text-[10px] mono text-gray-500 uppercase tracking-widest block">Physics & Attraction</label>
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between text-[10px] mono mb-2 text-gray-400">
+                            <span>Target Density</span>
+                            <span id="numPointsValue">1200</span>
+                        </div>
+                        <input type="range" id="numPoints" min="100" max="5000" value="1500" class="w-full">
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[10px] mono mb-2 text-gray-400">
+                            <span>Influence Zone</span>
+                            <span id="influenceRadiusValue">80</span>
+                        </div>
+                        <input type="range" id="influenceRadius" min="20" max="300" value="80" class="w-full">
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[10px] mono mb-2 text-gray-400">
+                            <span>Growth Step</span>
+                            <span id="segLengthValue">4</span>
+                        </div>
+                        <input type="range" id="segLength" min="1" max="15" value="4" step="0.5" class="w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section space-y-6">
+                <label class="text-[10px] mono text-gray-500 uppercase tracking-widest block">Appearance</label>
+                <div class="flex items-center space-x-4">
+                    <div class="flex-grow">
+                        <label class="text-[9px] mono text-gray-600 block mb-1">Base</label>
+                        <input type="color" id="startColor" value="#3b82f6" class="w-full h-10 bg-transparent border-none cursor-pointer">
+                    </div>
+                    <div class="flex-grow">
+                        <label class="text-[9px] mono text-gray-600 block mb-1">Tips</label>
+                        <input type="color" id="endColor" value="#ffffff" class="w-full h-10 bg-transparent border-none cursor-pointer">
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-[10px] mono mb-2 text-gray-400">
+                        <span>Max Girth</span>
+                        <span id="maxThicknessValue">4.0</span>
+                    </div>
+                    <input type="range" id="maxThickness" min="1" max="15" value="5.0" step="0.5" class="w-full">
+                </div>
+            </div>
+
+            <div class="pt-10">
+                <button id="runSimulation" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white mono text-xs font-bold rounded transition-all shadow-xl shadow-blue-900/20 active:scale-[0.97]">
+                    Grow
+                </button>
+            </div>
+        </aside>
+
+        <section class="flex-grow bg-[#05070a] relative flex items-center justify-center p-8 overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none opacity-[0.02]" style="background-image: radial-gradient(#fff 1px, transparent 0); background-size: 50px 50px;"></div>
+            <div class="w-full h-full relative border border-[#1c2128] flex items-center justify-center bg-black/40">
+                <canvas id="colonizationCanvas"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/math.js"></script>
+    <script src="js/entities.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

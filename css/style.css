@@ -1,0 +1,62 @@
+:root {
+    --accent: #3b82f6;
+    --bg-dark: #05070a;
+    --panel-bg: #0d1117;
+    --border: #21262d;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: #c9d1d9;
+}
+
+.mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom UI Scrollbar */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 10px;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    background: #30363d;
+    height: 4px;
+    border-radius: 2px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg-dark);
+}
+
+.sidebar-section {
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 0;
+}
+
+.status-tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
